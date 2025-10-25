@@ -2,6 +2,48 @@
 
 This repository contains AI agent configurations for various development frameworks and tools.
 
+## Quick Start
+
+### One-Command Installation
+
+Set up all AI agent configurations in your project with a single command:
+
+```bash
+# Install in current directory
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
+
+# Install in specific directory
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- /path/to/project
+
+# Install with custom Chrome port
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- /path/to/project 9222
+```
+
+**What it does:**
+- ✅ Creates directory structure for all AI tools (.amazonq, .cursor, .claude, .ulpi)
+- ✅ Downloads all agent configurations and rules
+- ✅ Sets up MCP servers (context7, chrome-devtools)
+- ✅ Configures project-level `.mcp.json`
+- ✅ Updates global Amazon Q MCP configuration (`~/.aws/amazonq/mcp.json`)
+- ✅ Makes utility scripts executable
+- ✅ Creates README with documentation
+
+### Manual Installation
+
+Clone the repository and copy the configurations you need:
+
+```bash
+git clone https://github.com/CiprianSpiridon/ai-agents.git
+cd ai-agents
+
+# Copy all configurations to your project
+cp -r .amazonq /path/to/your/project/
+cp -r .cursor /path/to/your/project/
+cp -r .claude /path/to/your/project/
+cp -r .ulpi /path/to/your/project/
+cp .mcp.json /path/to/your/project/
+```
+
 ## Structure
 
 ```
@@ -23,7 +65,8 @@ This repository contains AI agent configurations for various development framewo
 │   │   └── engineering/
 │   │       └── laravel-senior-engineer.yaml  # ULPI agent configuration
 │   └── tools/
-│       └── launch-chrome-debug.sh # Chrome debugging launch script
+│       ├── launch-chrome-debug.sh # Chrome debugging launch script
+│       └── setup.sh               # One-command setup script
 └── .mcp.json                      # MCP server configurations
 ```
 
@@ -156,6 +199,7 @@ Located in `.ulpi/agents/engineering/`, these YAML-based agent configurations wo
 ### Tools
 
 The `.ulpi/tools/` directory contains utility scripts:
+- `setup.sh` - One-command installation script for setting up all AI agent configurations
 - `launch-chrome-debug.sh` - Launch Chrome with remote debugging for MCP integration
 
 ## Claude Code Agents
