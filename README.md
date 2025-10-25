@@ -8,6 +8,7 @@ This repository contains AI agent configurations for various development framewo
 .
 ├── .cursor/
 │   └── agents/
+│       ├── AGENTS.md              # Global Cursor agent instructions
 │       └── laravel/
 │           └── AGENTS.md          # Laravel Senior Engineer agent for Cursor
 ├── .claude/
@@ -15,9 +16,11 @@ This repository contains AI agent configurations for various development framewo
 │       └── engineering/
 │           └── laravel-senior-engineer.md  # Claude Code agent
 ├── .ulpi/
-│   └── agents/
-│       └── engineering/
-│           └── laravel-senior-engineer.yaml  # ULPI agent configuration
+│   ├── agents/
+│   │   └── engineering/
+│   │       └── laravel-senior-engineer.yaml  # ULPI agent configuration
+│   └── tools/
+│       └── launch-chrome-debug.sh # Chrome debugging launch script
 └── .mcp.json                      # MCP server configurations
 ```
 
@@ -29,7 +32,7 @@ This project uses Model Context Protocol (MCP) servers to extend AI capabilities
 Provides enhanced context management capabilities.
 
 ### Chrome DevTools
-Allows Claude Code to control and interact with Chrome browser via the DevTools Protocol.
+Allows ULPI and Claude Code to control and interact with Chrome browser via the DevTools Protocol.
 
 #### Setup Chrome DevTools MCP
 
@@ -68,7 +71,7 @@ The Chrome DevTools MCP server is already configured in `.mcp.json`:
 
 **3. Usage**
 
-Once Chrome is running with remote debugging and the MCP server is configured, Claude Code can:
+Once Chrome is running with remote debugging and the MCP server is configured, ULPI and Claude Code can:
 - Navigate to URLs
 - Click elements
 - Fill forms
@@ -79,27 +82,19 @@ Once Chrome is running with remote debugging and the MCP server is configured, C
 
 **Quick Start Script**
 
-Create a shell script to launch Chrome for debugging:
+Use the included script to launch Chrome for debugging:
 
 ```bash
-#!/bin/bash
-# launch-chrome-debug.sh
-
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --remote-debugging-port=9222 \
-  --user-data-dir="$(mktemp -d /tmp/chrome-debug-XXXXXX)" \
-  --no-first-run \
-  --no-default-browser-check &
-
-echo "Chrome launched with remote debugging on port 9222"
-echo "You can now use Claude Code with Chrome DevTools MCP"
+./.ulpi/tools/launch-chrome-debug.sh
 ```
 
-Make it executable:
-```bash
-chmod +x launch-chrome-debug.sh
-./launch-chrome-debug.sh
-```
+The script automatically:
+- Reads the port from `.mcp.json` (defaults to 9222)
+- Launches Chrome with remote debugging enabled
+- Uses a temporary profile directory
+- Provides helpful status messages
+
+The script is already executable and ready to use.
 
 ## Cursor Agents
 
@@ -118,13 +113,18 @@ The Laravel Senior Engineer agent (`.cursor/agents/laravel/AGENTS.md`) provides 
 - Manually invoke with `@AGENTS` reference
 - Combines hierarchically with parent directory instructions
 
-## Claude Code Agents
-
-Located in `.claude/agents/engineering/`, these agents provide specialized guidance for Claude Code users.
-
 ## ULPI Agents
 
 Located in `.ulpi/agents/engineering/`, these YAML-based agent configurations work with ULPI-compatible systems.
+
+### Tools
+
+The `.ulpi/tools/` directory contains utility scripts:
+- `launch-chrome-debug.sh` - Launch Chrome with remote debugging for MCP integration
+
+## Claude Code Agents
+
+Located in `.claude/agents/engineering/`, these agents provide specialized guidance for Claude Code users.
 
 ---
 
