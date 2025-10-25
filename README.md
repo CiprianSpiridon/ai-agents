@@ -8,27 +8,61 @@ This repository contains AI agent configurations for various development framewo
 
 Professional installer that downloads only the files you need. Choose which editors to install:
 
+**Interactive Installation** (Recommended - will prompt for framework):
 ```bash
-# Install ALL editors (default)
 curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
+```
 
-# Install only Cursor with Laravel framework
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors cursor --framework laravel
+**Install ALL editors** (default):
+```bash
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
+```
 
-# Install ULPI and Codex for Next.js (coming soon, defaults to Laravel)
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors ulpi,codex --framework nextjs
+**Install specific editor with framework**:
+```bash
+# Cursor with Laravel
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --editors cursor --framework laravel
+```
 
+```bash
+# Claude Code with Next.js
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --editors claude --framework nextjs
+```
+
+```bash
+# Amazon Q with NestJS
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --editors amazonq --framework nestjs
+```
+
+**Install multiple editors**:
+```bash
+# ULPI and Codex for Expo React Native
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --editors ulpi,codex --framework expo-react-native
+```
+
+**Custom directory**:
+```bash
 # Install Amazon Q in specific directory
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --target /my/project --editors amazonq --framework laravel
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --target /my/project --editors amazonq --framework magento
+```
 
+**Custom Chrome debug port**:
+```bash
 # Install with custom Chrome port
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --port 9000 --editors claude --framework laravel
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --port 9000 --editors claude --framework express
+```
 
-# Preview installation (dry-run)
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors cursor --framework laravel --dry-run
-
-# Interactive installation (will prompt for framework)
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
+**Preview installation** (dry-run):
+```bash
+# Preview what will be installed without installing
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | \
+  bash -s -- --editors cursor --framework flutter --dry-run
 ```
 
 **Options:**
@@ -44,10 +78,12 @@ curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulp
   - `ulpi,cursor` - Multiple editors (comma-separated)
 - `--framework FRAMEWORK` - Framework/stack to use (default: interactive prompt)
   - `laravel` - Laravel 12.x with multi-database, queues, Horizon
-  - `nextjs` - Next.js with React and TypeScript (coming soon)
-  - `nodejs` - Node.js with Express/Fastify/NestJS (coming soon)
-  - `react-native` - React Native/Expo mobile apps (coming soon)
-  - `magento` - Magento 2 e-commerce (coming soon)
+  - `express` - Express.js with REST API and middleware patterns
+  - `nestjs` - NestJS TypeScript enterprise framework with Bull/BullMQ queues
+  - `nextjs` - Next.js 14/15 with App Router, Server Components, Server Actions
+  - `expo-react-native` - Expo React Native for cross-platform mobile apps
+  - `flutter` - Flutter with Dart for multi-platform development
+  - `magento` - Magento 2 e-commerce with dependency injection and plugins
 - `--dry-run` - Preview what will be installed without installing
 - `--help` - Show help message
 
