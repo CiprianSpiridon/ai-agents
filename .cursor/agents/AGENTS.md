@@ -94,8 +94,11 @@ Global instructions for AI agents working across all frameworks and technologies
 For framework-specific guidance, see the nested AGENTS.md files:
 
 - **Laravel**: `.cursor/agents/laravel/AGENTS.md` - Laravel 12.x development, queues, Horizon, multi-database
-- **Next.js**: `.cursor/agents/nextjs/AGENTS.md` - (Coming soon)
-- **Node.js**: `.cursor/agents/nodejs/AGENTS.md` - (Coming soon)
-- **React Native**: `.cursor/agents/react-native/AGENTS.md` - (Coming soon)
+- **Express**: `.cursor/agents/express/AGENTS.md` - Express.js with REST API and middleware patterns
+- **NestJS**: `.cursor/agents/nestjs/AGENTS.md` - NestJS TypeScript enterprise framework, Bull/BullMQ queues
+- **Next.js**: `.cursor/agents/nextjs/AGENTS.md` - Next.js 14/15 with App Router, Server Components, Server Actions
+- **Expo React Native**: `.cursor/agents/expo-react-native/AGENTS.md` - Cross-platform mobile with Expo
+- **Flutter**: `.cursor/agents/flutter/AGENTS.md` - Cross-platform with Dart and Flutter SDK
+- **Magento**: `.cursor/agents/magento/AGENTS.md` - Magento 2 e-commerce development
 
 These framework-specific files extend and override these global instructions with specialized patterns and practices.

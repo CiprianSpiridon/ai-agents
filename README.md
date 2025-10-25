@@ -6,27 +6,60 @@ This repository contains AI agent configurations for various development framewo
 
 ### One-Command Installation
 
-Set up all AI agent configurations in your project with a single command:
+Professional installer that downloads only the files you need. Choose which editors to install:
 
 ```bash
-# Install in current directory
+# Install ALL editors (default)
 curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
 
-# Install in specific directory
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- /path/to/project
+# Install only Cursor with Laravel framework
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors cursor --framework laravel
+
+# Install ULPI and Codex for Next.js (coming soon, defaults to Laravel)
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors ulpi,codex --framework nextjs
+
+# Install Amazon Q in specific directory
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --target /my/project --editors amazonq --framework laravel
 
 # Install with custom Chrome port
-curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- /path/to/project 9222
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --port 9000 --editors claude --framework laravel
+
+# Preview installation (dry-run)
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash -s -- --editors cursor --framework laravel --dry-run
+
+# Interactive installation (will prompt for framework)
+curl -fsSL https://raw.githubusercontent.com/CiprianSpiridon/ai-agents/main/.ulpi/tools/setup.sh | bash
 ```
 
-**What it does:**
-- ✅ Creates directory structure for all AI tools (.amazonq, .cursor, .claude, .ulpi)
-- ✅ Downloads all agent configurations and rules
-- ✅ Sets up MCP servers (context7, chrome-devtools)
-- ✅ Configures project-level `.mcp.json`
-- ✅ Updates global Amazon Q MCP configuration (`~/.aws/amazonq/mcp.json`)
-- ✅ Makes utility scripts executable
-- ✅ Creates README with documentation
+**Options:**
+- `--target DIR` - Target directory (default: current directory)
+- `--port PORT` - Chrome debug port (default: 9222)
+- `--editors EDITORS` - Editors to install (default: all)
+  - `all` - Install all editors (ULPI, Cursor, Amazon Q, Claude Code, Codex)
+  - `ulpi` - ULPI AI agent system
+  - `cursor` - Cursor AI editor
+  - `amazonq` - Amazon Q Developer
+  - `claude` - Claude Code
+  - `codex` - GitHub Codex (AGENTS.md format)
+  - `ulpi,cursor` - Multiple editors (comma-separated)
+- `--framework FRAMEWORK` - Framework/stack to use (default: interactive prompt)
+  - `laravel` - Laravel 12.x with multi-database, queues, Horizon
+  - `nextjs` - Next.js with React and TypeScript (coming soon)
+  - `nodejs` - Node.js with Express/Fastify/NestJS (coming soon)
+  - `react-native` - React Native/Expo mobile apps (coming soon)
+  - `magento` - Magento 2 e-commerce (coming soon)
+- `--dry-run` - Preview what will be installed without installing
+- `--help` - Show help message
+
+**Features:**
+- ✅ **Framework selection** - Interactive or CLI-based framework/stack selection
+- ✅ **Selective downloads** - Only downloads files for selected editors and framework
+- ✅ **Interactive confirmation** - Shows what will be installed before proceeding
+- ✅ **Progress tracking** - Real-time download progress
+- ✅ **Dry-run mode** - Preview installation without making changes
+- ✅ **Smart configuration** - Updates global Amazon Q config only if needed
+- ✅ **Professional UI** - Clear, colorful output with progress indicators
+- ✅ **Error handling** - Validates inputs and handles failures gracefully
 
 ### Manual Installation
 
@@ -60,6 +93,8 @@ cp .mcp.json /path/to/your/project/
 │   └── agents/
 │       └── engineering/
 │           └── laravel-senior-engineer.md  # Claude Code agent
+├── .codex/
+│   └── laravel.md                 # Codex Laravel agent (copied to project root as AGENTS.md)
 ├── .ulpi/
 │   ├── agents/
 │   │   └── engineering/
@@ -205,6 +240,51 @@ The `.ulpi/tools/` directory contains utility scripts:
 ## Claude Code Agents
 
 Located in `.claude/agents/engineering/`, these agents provide specialized guidance for Claude Code users.
+
+## GitHub Codex Agents
+
+### AGENTS.md Format
+
+GitHub Codex uses the `AGENTS.md` file in the project root to provide AI assistance. The setup script automatically copies the appropriate framework agent to your project root as `AGENTS.md`.
+
+**Available Framework Agents:**
+- `.codex/laravel.md` - Laravel 12.x agent with multi-database, queues, Horizon, and production patterns
+
+**Usage with Codex:**
+- The `AGENTS.md` file is automatically discovered in the project root
+- Provides comprehensive framework-specific guidance
+- Includes code examples, best practices, and production patterns
+- Automatically applies when using GitHub Codex
+
+**How it works:**
+1. Run the setup script with `--editors codex --framework laravel`
+2. The installer downloads `.codex/laravel.md` from the repository
+3. The file is automatically copied to `AGENTS.md` in your project root
+4. GitHub Codex discovers and uses the `AGENTS.md` file
+
+### MCP Server Configuration
+
+When installing Codex support, the setup script automatically configures MCP servers in the global Codex configuration file.
+
+**Configuration File:** `~/.codex/config.toml`
+
+The installer adds two MCP servers:
+
+```toml
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["-y", "chrome-devtools-mcp@latest", "-u", "http://localhost:9222"]
+```
+
+**Features:**
+- Automatically creates `~/.codex/config.toml` if it doesn't exist
+- Safely appends MCP servers if the file already exists
+- Preserves existing Codex configuration (model providers, etc.)
+- Only adds servers that don't already exist
 
 ---
 
