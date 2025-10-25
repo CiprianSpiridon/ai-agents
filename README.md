@@ -6,6 +6,9 @@ This repository contains AI agent configurations for various development framewo
 
 ```
 .
+├── .amazonq/
+│   └── rules/
+│       └── laravel.rule.md        # Laravel development rule for Amazon Q
 ├── .cursor/
 │   └── agents/
 │       ├── AGENTS.md              # Global Cursor agent instructions
@@ -95,6 +98,39 @@ The script automatically:
 - Provides helpful status messages
 
 The script is already executable and ready to use.
+
+## Amazon Q Developer Rules
+
+### Laravel Rule
+
+The Laravel development rule (`.amazonq/rules/laravel.rule.md`) provides comprehensive coding standards for Laravel 12.x development:
+
+- Multi-database architectures (MySQL, Redis, DynamoDB)
+- Queue systems with Laravel Horizon
+- Service layer patterns and dependency injection
+- API development with FormRequests and Resources
+- Security protocols and testing requirements
+- Production-ready patterns and best practices
+
+**Usage in Amazon Q:**
+- Place rules in `.amazonq/rules/` directory
+- Rules automatically apply to your project
+- Supports both project-local and global configurations
+- Use Markdown format with `.rule.md` extension
+
+**Global Configuration:**
+For global MCP server configuration, create `~/.aws/amazonq/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest", "-u", "http://localhost:9222"]
+    }
+  }
+}
+```
 
 ## Cursor Agents
 
